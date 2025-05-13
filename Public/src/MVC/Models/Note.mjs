@@ -63,7 +63,7 @@ export class NotesModels {
     }
 
     // Obtener una nota o blog por su fecha de creación
-    static async CreateNote({createNotes}){
+    static async getCreateNote({createNotes}){
         if(createNotes){
             return Notes.filter((note) => note.createNotes === createNotes);
         }
@@ -74,7 +74,7 @@ export class NotesModels {
     }
 
     // Obtener una nota o blog por su fecha de actualización
-    static async UpdateNote({updateNotes}){
+    static async getUpdateNote({updateNotes}){
         if(updateNotes){
             return Notes.filter((note) => note.updateNotes === updateNotes);
         }
