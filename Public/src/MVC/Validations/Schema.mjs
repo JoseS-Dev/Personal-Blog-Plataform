@@ -13,18 +13,18 @@ export const SchemaNotes = zod.object({
         required_error: 'La categoría es requerida',
         invalid_type_error: 'La categoría debe ser un string'
     }),
-    tags: zod.enum([]).array({
+    tags: zod.string().array({
         required_error: 'Las etiquetas son requeridas',
         invalid_type_error: 'Las etiquetas deben ser un array de strings'
     }),
-    createNotes: zod.string({
+    createdNotes: zod.string({
         required_error: 'La fecha de creación es requerida',
         invalid_type_error: 'La fecha de creación debe ser un string'
     }).refine((value) => {
         const date = new Date(value);
         return !isNaN(date.getTime());
     }),
-    updateNotes : zod.string({
+    updatedNotes : zod.string({
         required_error: 'La fecha de actualización es requerida',
         invalid_type_error: 'La fecha de actualización debe ser un string'
     }).refine((value) => {

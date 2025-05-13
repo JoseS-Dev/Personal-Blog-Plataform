@@ -111,11 +111,11 @@ export class NotesController {
     }
 
     // Obtener una nota por su fecha de creación 
-    getCreateNote = async(req, res) => {
+    getCreatedNote = async(req, res) => {
         try{
-            const {createNotes} = req.params
-            if(createNotes){
-                const NoteCreateDate = await this.NotesModels.getCreateNote({createNotes});
+            const {createdNotes} = req.params
+            if(createdNotes){
+                const NoteCreateDate = await this.NotesModels.getCreatedNote({createdNotes});
                 return res.status(200).json(NoteCreateDate);
             }
             else{
@@ -129,11 +129,11 @@ export class NotesController {
     }
 
     // Obtener una nota por su fecha de actualización
-    getUpdateNote = async(req, res) =>{
+    getUpdatedNote = async(req, res) =>{
         try{
-            const {updateNotes} = req.params;
-            if(updateNotes){
-                const NoteUpdateDate = await this.NotesModels.getUpdateNote({updateNotes});
+            const {updatedNotes} = req.params;
+            if(updatedNotes){
+                const NoteUpdateDate = await this.NotesModels.getUpdatedNote({updatedNotes});
                 return res.status(200).json(NoteUpdateDate);
             }
             else{
@@ -152,7 +152,7 @@ export class NotesController {
             const result = validateNotes(req.body);
             if(!result.success){
                 return res.status(500).json({
-                    message: 'Debe un dato que no esta validado'
+                    error: result.error.issues
                 })
             }
             const Create = await this.NotesModels.createNotes({notes: result.data});

@@ -1,0 +1,43 @@
+### Obtener todas las notas
+GET http://localhost:3000/Notes
+
+### Obtener una nota por su id
+GET http://localhost:3000/Notes/1
+
+### Obtener una nota por su Categoria
+GET http://localhost:3000/Notes/category/Technology
+
+### Obtener una nota por su etiqueta
+GET http://localhost:3000/Notes/tags/Tech
+
+### Obteenr una nota por su fecha de creación
+GEt http://localhost:3000/Notes/createDate/2021-09-10
+
+### Obtener una nota por su fecha de actualización
+GEt http://localhost:3000/Notes/updateDate/2021-09-05
+
+### Crear una nota o blog
+POST http://localhost:3000/Notes
+Content-Type: application/json
+
+{
+  "id": 17,
+  "title": "Exploring Virtual Reality",
+  "content": "An introduction to virtual reality technology and its applications.",
+  "category": "Technology",
+  "tags": ["Virtual Reality", "VR", "Tech"],
+  "createdNotes": "2024-06-01",
+  "updatedNotes": "2024-06-01"
+}
+
+### Actualizar una nota
+PATCH http://localhost:3000/Notes/1
+Content-Type: application/json
+
+{
+    "title": "sex"
+}
+
+### Eliminar una nota
+DELETE http://localhost:3000/Notes/1
+

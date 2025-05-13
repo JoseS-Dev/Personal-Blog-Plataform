@@ -63,9 +63,9 @@ export class NotesModels {
     }
 
     // Obtener una nota o blog por su fecha de creación
-    static async getCreateNote({createNotes}){
-        if(createNotes){
-            return Notes.filter((note) => note.createNotes === createNotes);
+    static async getCreatedNote({createdNotes}){
+        if(createdNotes){
+            return Notes.filter((note) => note.createdNotes === createdNotes);
         }
         else{
             console.log('No se ha proporcionado una fecha de creación');
@@ -74,9 +74,9 @@ export class NotesModels {
     }
 
     // Obtener una nota o blog por su fecha de actualización
-    static async getUpdateNote({updateNotes}){
-        if(updateNotes){
-            return Notes.filter((note) => note.updateNotes === updateNotes);
+    static async getUpdatedNote({updatedNotes}){
+        if(updatedNotes){
+            return Notes.filter((note) => note.updatedNotes === updatedNotes);
         }
         else{
             console.log('No se ha proporcionado una fecha de actualización');
