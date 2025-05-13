@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { NotesController } from "../Controller/Notes.mjs";
-import { NotesModels } from "../Models/Note.mjs";
+import { NotesModels } from "../Models/NoteDB.mjs";
 
 
 const router = Router();
