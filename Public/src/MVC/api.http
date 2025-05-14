@@ -21,7 +21,6 @@ POST http://localhost:3000/Notes
 Content-Type: application/json
 
 {
-  "id": 17,
   "title": "Exploring Virtual Reality",
   "content": "An introduction to virtual reality technology and its applications.",
   "category": "Technology",

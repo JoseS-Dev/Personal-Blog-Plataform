@@ -13,17 +13,49 @@ export class NotesModels {
 
     // Obtener una nota pr su id
     static async getByID({id}){
-        pass
+        if(id){
+            const [noteID] = await connectionDb.query(`SELECT * FROM content_notes WHERE id = ?`, [id]);
+            if(noteID.length <= 0){
+                console.log("No hay datos en la tabla")
+            }
+            const cleanBuffers = noteID.map((note) => ConverterBuffers(note));
+            return cleanBuffers;
+        }
+        else{
+            console.log("No se ha proporcionado un id");
+            return null;
+        }
     }
 
     // Obtener una nota por su titulo
     static async getByTitle({title}){
-        pass
+        if(title){
+            const [noteTitle] = await connectionDb.query(`SELECT * FROM content_notes WHERE title = ?`, [title]);
+            if(noteTitle.length <= 0){
+                console.log("No hay datos en la tabla")
+            }
+            const cleanBuffersTitle = noteTitle.map((note) => ConverterBuffers(note));
+            return cleanBuffersTitle;
+        }
+        else{
+            console.log("No se ha proporcionado un titulo");
+            return null;
+        }
     }
 
     // Obtener una nota por su contenido
     static async getByContent({content}){
-        pass
+        if(content){
+            const [NotesContent] = await connectionDb.query(`SELECT * FROM content_notes WHERE content = ?`, [content]);
+            if(NotesContent.length <= 0){
+                console.log("No hay datos en la tabla");
+            }
+            return NotesContent.map((note) => ConverterBuffers(note));
+        }
+        else{
+            console.log("No se ha proporcionado un contenido");
+            return null;
+        }
     }
 
     // Obtener una nota o blog por su categoria
@@ -38,26 +70,127 @@ export class NotesModels {
 
     // Obtener una nota o blog por su fecha de creación
     static async getCreatedNote({createdNotes}){
-        pass
+        if(createdNotes){
+            const [NotesCreatedDate] = await connectionDb.query(`SELECT * FROM content_notes WHERE createdNotes = ?`, [createdNotes]);
+            if(NotesCreatedDate.length <= 0){
+                console.log("No hay datos en la tabla");
+            }
+            return NotesCreatedDate.map((note) => ConverterBuffers(note));
+        }
+        else{
+            console.log("No se ha proporcionado una fecha de creación");
+            return null;
+        }
     }
 
     // Obtener una nota o blog por su fecha de actualización
     static async getUpdatedNote({updatedNotes}){
-        pass
+        if(updatedNotes){
+            const [NotesUpdateDate] = await connectionDb.query(`SELECT * FROM content_notes WHERE updatedNotes = ?`, [updatedNotes]);
+            if(NotesUpdateDate.length <= 0){
+                console.log("No hay datos en la tabla");
+            }
+            return NotesUpdateDate.map((note) => ConverterBuffers(note)); 
+        }
+        else{
+            console.log("No se ha proporcionado una fecha de actualización");
+            return null;
+        }
     }
 
     // Crear una nota o blog
     static async createNotes({notes}){
-        pass
+        if(notes){
+            const {title, content, category, tags, createdNotes, updatedNotes} = notes;
+            // Se verifica si la categoria existen
+            const [categoryResult] = await connectionDb.query(`SELECT * FROM names_category WHERE category_name = ?`, [category]);
+            let categoryID = categoryResult.length > 0 ? categoryResult[0].id_category : null;
+
+            // Se verifica si la etiqueta existen
+            const tagsID = []
+            console.log(tags)
+            for (const tag of tags){
+                const [tagsResult] = await connectionDb.query(`SELECT * FROM names_tags WHERE name_tag = ?`, [tag]);
+                if(tagsResult.length > 0){
+                    tagsID.push(tagsResult[0].id_tags);
+                }
+                else{
+                    console.log(`No existe la etiqueta ${tag}, se creara una nueva`);
+                    const [insertTag] = await connectionDb.query(`INSERT INTO names_tags (name_tag) VALUES (?)`, [tag]);
+                    if(insertTag.affectedRows > 0){
+                        console.log(`Etiqueta ${tag} creada`);
+                        tagsID.push(insertTag.insertId);
+                    }
+                }
+            }
+            // Si la categoria no existe, se crea una nueva
+            if(!categoryID){
+                const [insertCategory] = await connectionDb.query(`INSERT INTO names_category (category_name) VALUES (?)`, [category]);
+                if(insertCategory.affectedRows > 0){
+                    console.log(`Categoria ${category} creada`);
+                    categoryID = insertCategory.insertId;
+                }
+            }
+
+            // Se Inserta la nota
+            const [insertNote] = await connectionDb.query(`INSERT INTO content_notes (title, content,  createdNotes, updatedNotes) VALUES (?, ?, ?, ?)`, [title, content, createdNotes, updatedNotes]);
+            if(insertNote.affectedRows > 0){
+                console.log("Nota o Blog creado");
+
+                // Relacionar la nota con la categoria
+                const [insertNoteCategory] = await connectionDb.query(`INSERT INTO notes_category (id_notes, id_category) VALUES (?, ?)`, [insertNote.insertId, categoryID]);
+                if(insertNoteCategory.affectedRows > 0){
+                    console.log("Nota o Blog relacionado con la categoria");
+                }
+
+                // Relacionar la nota con la categoria y las etiquetas
+                for(const tagID of tagsID){
+                    const [insertNoteTags] = await connectionDb.query(`INSERT INTO notes_tags(id_notes, id_category, id_tags) VALUES(?,?,?)`, [insertNote.insertId, categoryID, tagID]);
+                    if(insertNoteTags.affectedRows > 0){
+                        console.log("Nota o Blog relacionado con la etiqueta");
+                    }
+                }
+                return {
+                    message: "Nota o Blog creado",
+                    id: insertNote.insertId,
+                    title,
+                    content,
+                    category,
+                    tags,
+                    createdNotes,
+                    updatedNotes
+                }
+            }
+
+        }
+        else{
+            console.log("No se ha proporcionado una nota o blog");
+            return null;
+        }
     }
 
     // Actualizar una nota o blog
     static async UpdateNotes({id, notes}){
-        pass
+        if(id && notes){
+            
+        }
     }
 
     // Eliminar una nota o blog
     static async deleteNotes({id}){
-        pass
+        if(id){
+            const [deleteNote] = await connectionDb.query(`DELETE FROM content_notes WHERE id = ?`, [id]);
+            if(deleteNote.affectedRows > 0){
+                console.log("Nota o Blog eliminado");
+                return {
+                    message: "Nota o Blog eliminado",
+                    id
+                }
+            }
+        }
+        else{
+            console.log("No se ha proporcionado un id");
+            return null;
+        }
     }
 }
