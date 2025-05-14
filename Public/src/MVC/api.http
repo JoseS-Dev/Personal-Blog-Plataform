@@ -21,12 +21,12 @@ POST http://localhost:3000/Notes
 Content-Type: application/json
 
 {
-  "title": "Exploring Virtual Reality",
-  "content": "An introduction to virtual reality technology and its applications.",
-  "category": "Technology",
-  "tags": ["Virtual Reality", "VR", "Tech"],
-  "createdNotes": "2024-06-01",
-  "updatedNotes": "2024-06-01"
+  "title": "Startup Success Stories",
+  "content": "Inspirational stories from successful entrepreneurs.",
+  "category": "Business and Finance",
+  "tags": ["Startups", "Entrepreneurship"],
+  "createdNotes": "2021-10-25",
+  "updatedNotes": "2021-10-25"
 }
 
 ### Actualizar una nota

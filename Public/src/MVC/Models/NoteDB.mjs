@@ -60,12 +60,39 @@ export class NotesModels {
 
     // Obtener una nota o blog por su categoria
     static async getByCategory({category}){
-        pass
+        if(category){
+            const [NotesCategory] = await connectionDb.query(
+                `SELECT a.title, a.content, a.createdNotes, a.updatedNotes, b.category_name FROM content_notes
+                AS a INNER JOIN notes_category AS c ON a.id_notes = c.id_notes INNER JOIN names_category AS b 
+                ON c.id_category = b.id_category WHERE b.category_name = ?`, [category]);
+            
+            if(NotesCategory.length <= 0){
+                console.log("No hay datos en la tabla");
+                return null;
+            }
+            return NotesCategory.map((note) => ConverterBuffers(note));
+        }
     }
 
     // Obtener una nota o blog por su etiqueta
     static async getByTags({tags}){
-        pass
+        if(tags){
+            const allNotes = [];
+            for(const tag of tags){
+                const [NotesTags] = await connectionDb.query(
+                    `SELECT a.title, a.content, a.createdNotes, a.updatedNotes, b.name_tag FROM content_notes AS a 
+                    INNER JOIN notes_tags AS c ON a.id_notes = c.id_notes INNER JOIN names_tags AS b ON c.id_tags = b.id_tags
+                    WHERE b.name_tag = ?`, [tag]);
+                
+                if(NotesTags.length <= 0){
+                    console.log("No hay datos en la tabla");
+                    return null;
+                }
+                const cleanBuffersTags = NotesTags.map((note) => ConverterBuffers(note));
+                allNotes.push(...cleanBuffersTags);
+            }
+            return allNotes.length > 0 ? allNotes : null;
+        }
     }
 
     // Obtener una nota o blog por su fecha de creación
