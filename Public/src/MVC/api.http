@@ -34,7 +34,12 @@ PATCH http://localhost:3000/Notes/1
 Content-Type: application/json
 
 {
-    "title": "sex"
+    "title": "The Rise of Social Media",
+    "content": "Exploring how social media has changed communication.",
+    "category": "Social",
+    "tags": ["Social Media", "Trends"],
+    "createdNotes": "2021-09-05",
+    "updatedNotes": "2021-09-05"
 }
 
 ### Eliminar una nota

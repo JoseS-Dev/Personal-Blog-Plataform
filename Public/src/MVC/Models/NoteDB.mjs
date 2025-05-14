@@ -172,14 +172,78 @@ export class NotesModels {
     // Actualizar una nota o blog
     static async UpdateNotes({id, notes}){
         if(id && notes){
-            
+            const { title, content, category, tags, createdNotes, updatedNotes } = notes;
+
+            // Se verifica primero si la categoria existen
+            const [CategoryResult] = await connectionDb.query(`SELECT * FROM names_category WHERE category_name = ?`, [category]);
+            // Recupero el id de la categoria
+            let categoryID = CategoryResult.length > 0 ? CategoryResult[0].id_category : null;
+
+            // Se verifica si la etiqueta o las etiquetas existen
+            const tagsID = []
+            console.log(tags)
+            for (const tag of tags){
+                const [tagsResult] = await connectionDb.query(`SELECT * FROM names_tags WHERE name_tag = ?`, [tag]);
+                if(tagsResult.length > 0){
+                    tagsID.push(tagsResult[0].id_tags);
+                }
+                else{
+                    console.log(`No existe la etiqueta ${tag}, se creara una nueva`);
+                    const [insertTag] = await connectionDb.query(`INSERT INTO names_tags (name_tag) VALUES (?)`, [tag]);
+                    if(insertTag.affectedRows > 0){
+                        console.log(`Etiqueta ${tag} creada`);
+                        tagsID.push(insertTag.insertId);
+                    }
+                }
+            }
+
+            // Si la categoria no existen , se crea una nueva
+            if(!categoryID){
+                const [insertCategory] = await connectionDb.query(`INSERT INTO names_category (category_name) VALUES (?)`, [category]);
+                if(insertCategory.affectedRows > 0){
+                    console.log(`Categoria ${category} creada`);
+                    categoryID = insertCategory.insertId;
+                }
+            }
+
+            // Se actualiza la nota
+            const [updateNote] = await connectionDb.query(`UPDATE content_notes SET title = ?, content = ?, createdNotes = ?, updatedNotes = ? WHERE id_notes = ?`, [title, content, createdNotes, updatedNotes, id]);
+            if(updateNote.affectedRows > 0){
+                console.log("Nota o blog creado")
+
+                // Se actualiza la categoria
+                const [updateNoteCategory] = await connectionDb.query(`UPDATE notes_category SET id_category = ? WHERE id_notes = ?`, [categoryID, id]);
+                if(updateNoteCategory.affectedRows > 0){
+                    console.log("Nota o blog relacionado con la categoria");
+                }
+                // Se actualiza la etiqueta
+                for(const tagID of tagsID){
+                    const [updateNoteTags] = await connectionDb.query(`UPDATE notes_tags SET id_tags = ?, id_category = ? WHERE id_notes = ?`, [tagID,categoryID, id]);
+                    if(updateNoteTags.affectedRows > 0){
+                        console.log("Nota o blog relacionado con la etiqueta");
+                    }
+                }
+                return {
+                    message: "Nota o blog actualizado",
+                    id,
+                    title,
+                    content,
+                    category,
+                    tags,
+                    createdNotes,
+                    updatedNotes
+                }
+            }
         }
     }
 
     // Eliminar una nota o blog
     static async deleteNotes({id}){
         if(id){
-            const [deleteNote] = await connectionDb.query(`DELETE FROM content_notes WHERE id = ?`, [id]);
+            await connectionDb.query(`SET FOREIGN_KEY_CHECKS=0`);
+            const [deleteNote] = await connectionDb.query(`DELETE FROM content_notes WHERE id_notes = ?`, [id]);
+            await connectionDb.query(`SET FOREIGN_KEY_CHECKS = 1`);
+            
             if(deleteNote.affectedRows > 0){
                 console.log("Nota o Blog eliminado");
                 return {
