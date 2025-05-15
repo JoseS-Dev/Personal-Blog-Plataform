@@ -1,0 +1,128 @@
+.JS--MainPage{
+    border: 1px solid #fff;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--FontColor);
+}
+.JS--MainPage .JS--MainSection{
+    border-bottom: 1px solid #444;
+    width: 100%;
+    height: 35vh;
+    display: flex;
+    flex-flow: row wrap;
+}
+.JS--MainPage .JS--MainSection .JS--ContentLeft{
+    width: 65%;
+    border: 1px solid #444;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0 20px;
+}
+.JS--MainPage .JS--MainSection .JS--ContentLeft h2{
+    font-size: 2em;
+    letter-spacing: 1px;
+    font-weight: bold;
+}
+.JS--MainPage .JS--MainSection .JS--ContentLeft p{
+    font-size: 1.1em;
+    letter-spacing: 1px;
+    font-weight: 400;
+    width: 100%;
+}
+.JS--MainPage .JS--MainSection .JS--ContentLeft p::first-letter{
+    font-size: 1.5em;
+    font-weight: bold;
+    color: hsl(37, 67%, 60%)
+}
+.JS--MainPage .JS--MainSection .JS--ContentRight{
+    width: 35%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+svg{
+    filter: drop-shadow(0 0 5px #333);
+}
+.JS--MainPage .JS--SectionWhy{
+    width: 100%;
+    height: 53vh;
+}
+.JS--MainPage .JS--SectionWhy .JS--ContentLeftWhy{
+    width: 25%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.JS--MainPage .JS--SectionWhy .JS--ContentRightWhy{
+    width: 75%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: left;
+    padding: 10px 20px;
+}
+.JS--MainPage .JS--SectionWhy .JS--ContentRightWhy .JS--ContentText{
+    width: 100%;
+    height: 30%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px
+}
+.JS--MainPage .JS--SectionWhy .JS--ContentRightWhy .JS--ContentText h2{
+    font-size: 2em;
+    letter-spacing: 1px;
+    font-weight: bold;
+}
+.JS--MainPage .JS--SectionWhy .JS--ContentRightWhy .JS--ContentText p{
+    font-size: 1.1em;
+    letter-spacing: 1px;
+    font-weight: 400;
+    width: 100%;
+    text-align: center;
+}
+.JS--MainPage .JS--SectionWhy .JS--ContentRightWhy .JS--ContentCards{
+    width: 100%;
+    height: 70%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0 15px;
+    gap: 20px;
+}
+.JS--MainPage .JS--SectionWhy .JS--ContentRightWhy .JS--ContentCards .JS--Card{
+    border-top: 1px solid #444;
+    border-bottom: 1px solid #444;
+    width: 45%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 25px;
+    gap: 15px;
+}
+.JS--MainPage .JS--SectionWhy .JS--ContentRightWhy .JS--ContentCards .JS--Card h3{
+    font-size: 1.5em;
+    letter-spacing: 1px;
+    font-weight: bold;
+}
+.JS--MainPage .JS--SectionWhy .JS--ContentRightWhy .JS--ContentCards .JS--Card p{
+    font-size: 1em;
+    letter-spacing: 1px;
+    font-weight: 400;
+    width: 90%;
+    text-align: center;
+}
