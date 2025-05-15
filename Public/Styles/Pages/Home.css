@@ -64,6 +64,8 @@
     width: 95%;
     height: 100%;
     display: flex;
+    flex-flow: row wrap;
+    gap: 10px;
     justify-content: center;
     padding: 5px 15px;
     overflow-y: auto;
