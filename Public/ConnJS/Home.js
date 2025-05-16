@@ -4,7 +4,7 @@ let ListBlogsContent = []
 // Funcion para obtener la imagen segun la categoria del blog
 function getImageCategory(blog){
     let imageCategory = '';
-    switch(blog.category){
+    switch(blog.category_name){
         case 'Technology':
             imageCategory = 'asserts/Svg/Technology.svg';
             break;
@@ -36,7 +36,7 @@ function getImageCategory(blog){
 // Conexión a la api para obtener los blogs
 async function getBlogs(){
     try{
-        const response = await fetch('http://localhost:3500/Notes');
+        const response = await fetch(`http://localhost:3500/Notes`);
         if(!response.ok){
             throw new Error('Error en la respuesta de la API');
         }
@@ -46,7 +46,7 @@ async function getBlogs(){
             ContentList += `
                 <article class="JS--BlogCard">
                     <div class="JS--BlogCardImage">
-                        <img src= ${getImageCategory(blog)} alt=${blog.createdNotes} title="${blog.category}"/>
+                        <img src= ${getImageCategory(blog)} alt="${blog.createdNotes}" title="${blog.category_name}"/>
                     </div>
                     <div class="JS--BlogCardText">
                         <h4>${blog.title}</h4>
@@ -59,7 +59,7 @@ async function getBlogs(){
                 titleBlog: blog.title,
                 contentBlog: blog.content,
                 createdAt: blog.createdNotes,
-                CategoryBlog: blog.category,
+                CategoryBlog: blog.category_name,
                 tagsBlog: blog.tags,
             }
         })
