@@ -1,12 +1,22 @@
 import { connectionDb } from "../../Config.mjs";
 import { ConverterBuffers } from "../Componets/Utils.mjs";
+import { TAGS_NOTES } from "../Componets/Constants.mjs";
 export class NotesModels {
     // Funcion que obtiene todas las notas
     static async getAll(){
-        const [Notes] = await connectionDb.query('SELECT * FROM content_notes')
+        // Se obtiene los tags que tiene cada nota
+        const ContentNotes = TAGS_NOTES.map(() => '?').join(', ');
+        console.log(TAGS_NOTES);
+        const [Notes] = await connectionDb.query(
+            `SELECT a.title, a.content, a.createdNotes, b.category_name, c.name_tag FROM content_notes AS a
+            INNER JOIN notes_category AS d ON a.id_notes = d.id_notes INNER JOIN names_category AS b
+            ON d.id_category = b.id_category INNER JOIN notes_tags AS e ON a.id_notes = e.id_notes
+            INNER JOIN names_tags AS c ON e.id_tags = c.id_tags WHERE c.name_tag IN (${ContentNotes})`, TAGS_NOTES);
+        
         if(Notes.length <= 0){
             console.log("No hay datos en la tabla")
         }
+        
         const cleanBuffers = Notes.map((note) => ConverterBuffers(note));
         return cleanBuffers;
     }

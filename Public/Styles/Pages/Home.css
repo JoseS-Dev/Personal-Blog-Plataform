@@ -87,6 +87,20 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    transition: .1s ease-out;
+    cursor: pointer;
+}
+.JS--MainPage .JS--MainSection .JS--ContentRight .JS--ListBlog .JS--BlogCard:hover{
+    transform: scale(1.02);
+    background-color: #222;
+}
+.JS--MainPage .JS--MainSection .JS--ContentRight .JS--ListBlog .JS--BlogCard:hover h4{
+    color: #ddaa55;
+}
+.JS--MainPage .JS--MainSection .JS--ContentRight .JS--ListBlog .JS--BlogCard:hover button{
+    background-color: #111;
+    color: #ddaa55;
+    transform: scale(1.05);
 }
 .JS--MainPage .JS--MainSection .JS--ContentRight .JS--ListBlog .JS--BlogCard .JS--BlogCardImage{
     width: 100%;
@@ -110,7 +124,7 @@
     gap: 5px;
 }
 .JS--MainPage .JS--MainSection .JS--ContentRight .JS--ListBlog .JS--BlogCard h4{
-    font-size: 1.2em;
+    font-size: 0.9em;
     color: var(--FontColor);
     max-width: 100%;
     overflow: hidden;
@@ -130,8 +144,4 @@
     color: var(--FontColor);
     cursor: pointer;
     transition: .1s ease-out;
-}
-.JS--MainPage .JS--MainSection .JS--ContentRight .JS--ListBlog .JS--BlogCard button:hover{
-    background-color: #222;
-    color: #ddaa55;
 }

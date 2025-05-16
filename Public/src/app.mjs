@@ -9,7 +9,6 @@ const app = express();
 
 app.use(json());
 app.use(cors());
-app.use(express.static('Public'));
 
 app.use('/Notes', RouterNotes);
 

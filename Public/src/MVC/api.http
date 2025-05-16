@@ -1,23 +1,23 @@
 ### Obtener todas las notas
-GET http://localhost:3000/Notes
+GET http://localhost:3500/Notes
 
 ### Obtener una nota por su id
-GET http://localhost:3000/Notes/1
+GET http://localhost:3500/Notes/1
 
 ### Obtener una nota por su Categoria
-GET http://localhost:3000/Notes/category/Technology
+GET http://localhost:3500/Notes/category/Technology
 
 ### Obtener una nota por su etiqueta
-GET http://localhost:3000/Notes/tags/Tech
+GET http://localhost:3500/Notes/tags/Tech
 
 ### Obteenr una nota por su fecha de creación
-GEt http://localhost:3000/Notes/createDate/2021-09-10
+GEt http://localhost:3500/Notes/createDate/2021-09-10
 
 ### Obtener una nota por su fecha de actualización
-GEt http://localhost:3000/Notes/updateDate/2021-09-05
+GEt http://localhost:3500/Notes/updateDate/2021-09-05
 
 ### Crear una nota o blog
-POST http://localhost:3000/Notes
+POST http://localhost:3500/Notes
 Content-Type: application/json
 
 {
@@ -30,7 +30,7 @@ Content-Type: application/json
 }
 
 ### Actualizar una nota
-PATCH http://localhost:3000/Notes/1
+PATCH http://localhost:3500/Notes/1
 Content-Type: application/json
 
 {
@@ -43,5 +43,5 @@ Content-Type: application/json
 }
 
 ### Eliminar una nota
-DELETE http://localhost:3000/Notes/1
+DELETE http://localhost:3500/Notes/1
 
