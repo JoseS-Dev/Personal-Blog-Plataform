@@ -61,6 +61,7 @@ async function getBlogs(){
                 createdAt: blog.createdNotes,
                 CategoryBlog: blog.category_name,
                 tagsBlog: blog.tags,
+                ImageCategory: getImageCategory(blog),
             }
         })
         ListBlogs.innerHTML = ContentList;

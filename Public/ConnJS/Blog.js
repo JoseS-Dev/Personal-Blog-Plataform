@@ -1,5 +1,6 @@
-const ListCardsBlogs = document.getElementsByClassName('JS--Cards')[0];
-let ListBlogsContent = [];
+const { get } = require("react-native/Libraries/TurboModule/TurboModuleRegistry");
+
+const ListBlog = document.getElementsByClassName('JS--ListBlogs')[0];
 
 // Obtener la imagen segun la categoria del blog
 function getImageCategory(blog){
@@ -33,6 +34,7 @@ function getImageCategory(blog){
     console.log(imageCategory);
     return imageCategory;
 }
+
 // Obtener los blogs de la API
 async function getMyBlogs(){
     try{
@@ -59,14 +61,14 @@ async function getMyBlogs(){
                 titleBlog: blog.title,
                 contentBlog: blog.content,
                 categoryBlog: blog.category_name,
+                ImageCategory: getImageCategory(blog),
                 createdNotes: blog.createdNotes,
                 tagsBlog: blog.tags,
-                ImageCategory: getImageCategory(blog),
             }
-        })
-        ListCardsBlogs.innerHTML = ContentList;
-    
-    }catch(error){
+        });
+        ListBlog.innerHTML = ContentList;
+    }
+    catch(error){
         console.error('Error al obtener los blogs:', error);
     }
 }
