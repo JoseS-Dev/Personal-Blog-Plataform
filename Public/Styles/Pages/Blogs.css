@@ -85,6 +85,14 @@ svg:hover{
     transform: scale(1.01);
     border: 1px solid #ddaa00;
 }
+.JS--MainPage .JS--ContainerCards .JS--Cards--IsSelected{
+    background-color: #555;
+    border: 1px solid #ddaa00;
+}
+.JS--MainPage .JS--ContainerCards .JS--Visited{
+    background: linear-gradient(to right, #111, #000);
+    border: 1px solid #ddaa00;
+}
 .JS--MainPage .JS--ContainerCards .JS--Cards .JS--Card:hover h3{
     color: #ddaa33;
 }

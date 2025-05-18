@@ -1,6 +1,43 @@
-const { get } = require("react-native/Libraries/TurboModule/TurboModuleRegistry");
+// Obtenemos lo que tien el localStrorage
+const ListBlogsStorage = JSON.parse(localStorage.getItem('BlogDetails')) || [];
+console.log(ListBlogsStorage);
+let ListBlog = document.getElementsByClassName('JS--ListBlogs')[0];
+let ListBlogContent = [];
+let MainPage = document.getElementsByClassName('JS--MainPage')[0];
 
-const ListBlog = document.getElementsByClassName('JS--ListBlogs')[0];
+
+// Function para colocar todo el contenido traido por el localStorage
+function setContentBlog(){
+    MainPage.innerHTML = `
+        <section class="JS--MainSection">
+            <article class="JS--ContentLeft">
+                <div class="JS--ContentText">
+                    <h3>${ListBlogsStorage.titleBlog}</h3>
+                    <p>${ListBlogsStorage.contentBlog}</p>
+                </div>
+                <div class="JS--Tags">
+                    <h3>Tags:</h3>
+                    <div class="JS--ContentTags">
+                        <span>Tag 1</span>
+                    </div>
+                </div>
+                <div class="JS--ContentCards">
+                    <div class="JS--ContentMoreBlogs">
+                        <h3>More Blogs</h3>
+                    </div>
+                    <div class="JS--ListBlogs"></div>
+                </div>
+            </article>
+            <article class="JS--ContentRight">
+                <div class="JS--ContentRightImagen">
+                    <img src=${ListBlogsStorage.ImageCategory} alt="Imagen--Blog"/>
+                    <h2>${ListBlogsStorage.categoryBlog}</h2>
+                </div>
+            </article>
+        </section>
+    `
+    getMyBlogs();
+}
 
 // Obtener la imagen segun la categoria del blog
 function getImageCategory(blog){
@@ -31,9 +68,10 @@ function getImageCategory(blog){
             imageCategory = '../asserts/Svg/Education.svg';
             break;
     }
-    console.log(imageCategory);
     return imageCategory;
 }
+
+
 
 // Obtener los blogs de la API
 async function getMyBlogs(){
@@ -44,20 +82,19 @@ async function getMyBlogs(){
         }
         const data = await response.json();
         let ContentList = '';
-        ListBlogsContent = data.map((blog) => {
+        ListBlogContent = data.map((blog) => {
             ContentList += `
-                <div class="JS--Card">
-                    <div class="JS--ContentCardImage">
+                <div class="JS--card" id="${blog.id_notes}">
+                    <div class="JS--ContentImagenCard">
                         <img src= ${getImageCategory(blog)} alt="${blog.createdNotes}" title="${blog.category_name}"/>
                     </div>
-                    <div class="JS--ContentCardText">
-                        <h3>${blog.title}</h3>
-                        <p>${blog.content}</p>
+                    <div class="JS--ContentTextCard">
+                        <h4>${blog.title}</h4>
+                        <button class="Read--Blog">Read More</button>
                     </div>
                 </div>
             `
             return {
-                id: blog.id,
                 titleBlog: blog.title,
                 contentBlog: blog.content,
                 categoryBlog: blog.category_name,
@@ -72,4 +109,4 @@ async function getMyBlogs(){
         console.error('Error al obtener los blogs:', error);
     }
 }
-getMyBlogs();
+setContentBlog();

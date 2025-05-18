@@ -21,12 +21,12 @@ POST http://localhost:3500/Notes
 Content-Type: application/json
 
 {
-  "title": "Startup Success Stories",
-  "content": "Inspirational stories from successful entrepreneurs.",
-  "category": "Business and Finance",
-  "tags": ["Startups", "Entrepreneurship"],
-  "createdNotes": "2021-10-25",
-  "updatedNotes": "2021-10-25"
+  "title": "Top 10 Travel Destinations",
+    "content": "A list of must-see travel spots around the world.",
+    "category": "Lifestyle",
+    "tags": ["Travel", "Adventure"],
+    "createdNotes": "2021-09-10",
+    "updatedNotes": "2021-09-10"
 }
 
 ### Actualizar una nota
