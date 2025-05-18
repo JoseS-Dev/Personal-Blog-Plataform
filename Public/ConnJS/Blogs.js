@@ -64,11 +64,12 @@ async function getMyBlogs(){
                 contentBlog: blog.content,
                 categoryBlog: blog.category_name,
                 createdNotes: blog.createdNotes,
-                tagsBlog: blog.tags,
-                ImageCategory: getImageCategory(blog),
+                tagsBlog: blog.name_tag,
+                ImageCategory: getImageCategory(blog)
             }
         })
         ListCardsBlogs.innerHTML = ContentList;
+        console.log(ListBlogsContent[0].tagsBlog);
 
         const CardsList = document.querySelectorAll('.JS--Card');
         CardsList.forEach((card) => {

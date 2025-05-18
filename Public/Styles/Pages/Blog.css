@@ -218,7 +218,7 @@ svg:hover{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
     padding: 0 5px;
 }
 .JS--MainPage .JS--MainSection .JS--ContentRight .JS--ContentRightImagen{
@@ -230,11 +230,13 @@ svg:hover{
 }
 .JS--MainPage .JS--MainSection .JS--ContentRight .JS--ContentRightImagen img{
     width: 90%;
-    height: 85%;
+    height: 75%;
     filter: drop-shadow(0 0 10px #333);
 }
 .JS--MainPage .JS--MainSection .JS--ContentRight h2{
-    font-size: 1.5em;
-    letter-spacing: 1px;
+    font-size: 1.7em;
+    letter-spacing: 2px;
     font-weight: bold;
+    position: relative;
+    top: -25px;
 }

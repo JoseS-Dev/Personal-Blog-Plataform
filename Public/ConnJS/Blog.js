@@ -1,7 +1,6 @@
 // Obtenemos lo que tien el localStrorage
 const ListBlogsStorage = JSON.parse(localStorage.getItem('BlogDetails')) || [];
 console.log(ListBlogsStorage);
-let ListBlog = document.getElementsByClassName('JS--ListBlogs')[0];
 let ListBlogContent = [];
 let MainPage = document.getElementsByClassName('JS--MainPage')[0];
 
@@ -17,9 +16,7 @@ function setContentBlog(){
                 </div>
                 <div class="JS--Tags">
                     <h3>Tags:</h3>
-                    <div class="JS--ContentTags">
-                        <span>Tag 1</span>
-                    </div>
+                    <div class="JS--ContentTags"></div>
                 </div>
                 <div class="JS--ContentCards">
                     <div class="JS--ContentMoreBlogs">
@@ -31,12 +28,13 @@ function setContentBlog(){
             <article class="JS--ContentRight">
                 <div class="JS--ContentRightImagen">
                     <img src=${ListBlogsStorage.ImageCategory} alt="Imagen--Blog"/>
-                    <h2>${ListBlogsStorage.categoryBlog}</h2>
                 </div>
+                <h2>${ListBlogsStorage.categoryBlog}</h2>
             </article>
         </section>
     `
     getMyBlogs();
+    setTagsBlog();
 }
 
 // Obtener la imagen segun la categoria del blog
@@ -71,7 +69,18 @@ function getImageCategory(blog){
     return imageCategory;
 }
 
-
+// Function para colocar los tags del blog
+function setTagsBlog(){
+    const tags = ListBlogsStorage.tagsBlog.split(',');
+    console.log(tags);
+    let tagsList = '';
+    tags.forEach((tag) => {
+        tagsList += `
+            <span>${tag}</span>
+        `
+    });
+    document.getElementsByClassName('JS--ContentTags')[0].innerHTML = tagsList;
+}
 
 // Obtener los blogs de la API
 async function getMyBlogs(){
@@ -95,15 +104,24 @@ async function getMyBlogs(){
                 </div>
             `
             return {
+                idNotes: blog.id_notes,
                 titleBlog: blog.title,
                 contentBlog: blog.content,
                 categoryBlog: blog.category_name,
                 ImageCategory: getImageCategory(blog),
                 createdNotes: blog.createdNotes,
-                tagsBlog: blog.tags,
+                tagsBlog: blog.name_tag,
             }
         });
-        ListBlog.innerHTML = ContentList;
+        document.getElementsByClassName('JS--ListBlogs')[0].innerHTML = ContentList;
+        document.querySelectorAll('.Read--Blog').forEach((button) =>{
+            button.addEventListener('click', () => {
+                const IndexElement = button.parentElement.parentElement.id;
+                console.log(IndexElement);
+                localStorage.setItem('BlogDetails', JSON.stringify(ListBlogContent[ListBlogContent.findIndex((blog) => blog.idNotes == IndexElement)]));
+                window.location.href = `../Pages/BlogDetails.html?id=${IndexElement}`;
+            })
+        })
     }
     catch(error){
         console.error('Error al obtener los blogs:', error);

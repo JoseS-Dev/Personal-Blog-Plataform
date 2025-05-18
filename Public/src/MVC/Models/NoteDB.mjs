@@ -7,7 +7,7 @@ export class NotesModels {
         // Se obtiene los tags que tiene cada nota
         const ContentNotes = TAGS_NOTES.map(() => '?').join(', ');
         const [Notes] = await connectionDb.query(
-            `SELECT a.id_notes, a.title, a.content, a.createdNotes, b.category_name, GROUP_CONCAT(c.name_tag) AS name_tag FROM content_notes AS a
+            `SELECT a.id_notes, a.title, a.content, a.createdNotes, b.category_name, GROUP_CONCAT( DISTINCT c.name_tag SEPARATOR ',') AS name_tag FROM content_notes AS a
             INNER JOIN notes_category AS d ON a.id_notes = d.id_notes INNER JOIN names_category AS b
             ON d.id_category = b.id_category INNER JOIN notes_tags AS e ON a.id_notes = e.id_notes
             INNER JOIN names_tags AS c ON e.id_tags = c.id_tags WHERE c.name_tag IN (${ContentNotes})
