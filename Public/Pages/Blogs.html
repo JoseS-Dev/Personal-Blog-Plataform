@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="../Styles/Colors.css">
     <link rel="stylesheet" href="../Styles/Global.css">
     <link rel="stylesheet" href="../Styles/Header.css">
+    <link rel="stylesheet" href="../Styles/DialogAdd.css">
+    <link rel="stylesheet" href="../Styles/DialogModify.css">
     <link rel="stylesheet" href="../Styles/Pages/Blogs.css">
     <title>Personal-Blog || Blogs</title>
 </head>
@@ -38,6 +40,45 @@
         <Section class="JS--ContainerCards">
             <article class="JS--Cards"></article>
         </Section>
+        <dialog class="JS--DialogAdd" id="DialogAdd">
+            <article class="JS--ContainerAdd">
+                <h2>
+                    Create New Blog
+                    <span id="CloseDialogAdd" class="JS--CloseDialogAdd">X</span>
+                </h2>
+                <form class="JS--FormCreate" method="post">
+                    <div class="JS--ContainerInput">
+                        <div class="JS--ContainerInputTitle">
+                            <label for="TitleNotes">Title</label>
+                            <input type="text" id="TitleNotes" name="title" placeholder="Title of the blog" required>
+                        </div>
+                        <div class="JS--ContainerInputTitle">
+                            <label for="CategoryNotes">Category</label>
+                            <input type="text" id="CategoryNotes" name="category_name" placeholder="Category of the blog" required>
+                        </div>
+                    </div>
+                    <div class="JS--ContainerInput">
+                        <div class="JS--ContainerInputTitle">
+                            <label for="TagsNotes">Tags</label>
+                            <input type="text" id="TagsNotes" name="name_tag" placeholder="Tags of the blog" required>
+                        </div>
+                        <div class="JS--ContainerInputTitle">
+                            <label for="CreateDateNotes">Date</label>
+                            <input type="date" id="CreateDateNotes" name="createdNotes" required>
+                        </div>
+                    </div>
+                    <div class="JS--ContainerInput">
+                        <div class="JS--ContainerInputTextArea">
+                            <label for="ContentNotes">Content:</label>
+                            <textarea id="ContentNotes" name="content" placeholder="Content of the blog" required ></textarea>
+                        </div>
+                    </div>
+                    <div class="JS--Button">
+                        <button type="submit" id="CreateNotes">Create Blog</button>
+                    </div>
+                </form>
+            </article>
+        </dialog>
     </main>
     <script src="../ConnJS/Blogs.js"></script>
 </body>
