@@ -4,6 +4,12 @@ const OpenModalAdd = document.getElementById('Add--Notes');
 const CloseModalAdd = document.getElementById('CloseDialogAdd');
 const deleteBlog = document.getElementById('Delete--Notes');
 const addBlog = document.getElementsByClassName('JS--FormCreate')[0];
+const title = document.getElementById('TitleNotes').value;
+const content = document.getElementById('ContentNotes').value;
+const category = document.getElementById('CategoryNotes').value;
+const tagsValue = document.getElementById('TagsNotes').value;
+const createdNotes = document.getElementById('CreatedNotes').value;
+const updatedNotes = new Date().toISOString();
 let ListBlogsContent = [];
 let selectedVisitedCard = null;
 let selectedCard = null;
@@ -147,18 +153,22 @@ OpenModalAdd.addEventListener('click', () => {
 // Evento para cerrar la ventana modal de agregar un blog
 CloseModalAdd.addEventListener('click', () => {
     ModalAdd.close();
+    const titleInput = document.getElementById('TitleNotes');
+    const contentInput = document.getElementById('ContentNotes');
+    const categoryInput = document.getElementById('CategoryNotes');
+    const tagsInput = document.getElementById('TagsNotes');
+    const createdNotesInput = document.getElementById('CreatedNotes');
+    // Limipiar los campos de la ventana modal
+    titleInput.value = '';
+    contentInput.value = '';
+    categoryInput.value = '';
+    tagsInput.value = '';
+    createdNotesInput.value = '';
 })
 // Llamar a la API para agregar un blog
 addBlog.addEventListener('submit', async (event) => {
     event.preventDefault();
-    const title = document.getElementById('TitleNotes').value;
-    const content = document.getElementById('ContentNotes').value;
-    const category = document.getElementById('CategoryNotes').value;
-    const tagsValue = document.getElementById('TagsNotes').value;
-    const createdNotes = document.getElementById('CreatedNotes').value;
-    const updatedNotes = new Date().toISOString();
-
-
+    
     if(title && content && category && tagsValue && createdNotes){
         const dataContent = {
             title: title,
@@ -181,6 +191,7 @@ addBlog.addEventListener('submit', async (event) => {
             }
             const data = await response.json();
             alert('Blog is created successfully');
+            CloseModalAdd.click();
             getMyBlogs();
         }
         catch(error){
@@ -190,12 +201,5 @@ addBlog.addEventListener('submit', async (event) => {
             ModalAdd.close();
         }
     }
-    title.value = '';
-    content.value = '';
-    category.value = '';
-    tagsValue.value = '';
-    createdNotes.value = '';
-    
-
 })
 getMyBlogs();
