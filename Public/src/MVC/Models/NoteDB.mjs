@@ -279,14 +279,24 @@ export class NotesModels {
         if(id){
             await connectionDb.query(`SET FOREIGN_KEY_CHECKS=0`);
             const [deleteNote] = await connectionDb.query(`DELETE FROM content_notes WHERE id_notes = ?`, [id]);
-            await connectionDb.query(`SET FOREIGN_KEY_CHECKS = 1`);
-            
+            // Eliminar la relacion de la categoria
+            const [deleteNoteCategory] = await connectionDb.query(`DELETE FROM notes_category WHERE id_notes = ?`, [id]);
+            // Eliminar la relacion de las etiquetas
+            const [deleteNoteTags] = await connectionDb.query(`DELETE FROM notes_tags WHERE id_notes = ?`, [id]);
             if(deleteNote.affectedRows > 0){
-                console.log("Nota o Blog eliminado");
+                console.log("Nota o blog eliminado");
                 return {
-                    message: "Nota o Blog eliminado",
+                    message: "Nota o blog eliminado",
                     id
                 }
+            }
+            // Eliminar la categoria
+            if(deleteNoteCategory.affectedRows > 0){
+                console.log("Nota o blog eliminado de la categoria");
+            }
+            // Eliminar la etiqueta
+            if(deleteNoteTags.affectedRows > 0){
+                console.log("Nota o blog eliminado de la etiqueta");
             }
         }
         else{

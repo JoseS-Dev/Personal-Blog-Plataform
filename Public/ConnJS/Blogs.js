@@ -3,7 +3,7 @@ const ModalAdd = document.getElementById('DialogAdd');
 const OpenModalAdd = document.getElementById('Add--Notes');
 const CloseModalAdd = document.getElementById('CloseDialogAdd');
 const deleteBlog = document.getElementById('Delete--Notes');
-const AddBlog = document.getElementsByClassName('JS--FormCreate')[0];
+const addBlog = document.getElementsByClassName('JS--FormCreate')[0];
 let ListBlogsContent = [];
 let selectedVisitedCard = null;
 let selectedCard = null;
@@ -38,13 +38,14 @@ function getImageCategory(blog){
             imageCategory = '../asserts/Svg/Education.svg';
             break;
     }
-    console.log(imageCategory);
     return imageCategory;
 }
 // Obtener los blogs de la API
 async function getMyBlogs(){
     try{
-        const response = await fetch(`http://localhost:3500/Notes`);
+        const response = await fetch(`http://localhost:3500/Notes`,{
+            method: 'GET'
+        });
         if(!response.ok){
             throw new Error('Error en la respuesta de la API');
         }
@@ -73,7 +74,6 @@ async function getMyBlogs(){
             }
         })
         ListCardsBlogs.innerHTML = ContentList;
-        console.log(ListBlogsContent[0].tagsBlog);
 
         const CardsList = document.querySelectorAll('.JS--Card');
         CardsList.forEach((card) => {
@@ -148,59 +148,54 @@ OpenModalAdd.addEventListener('click', () => {
 CloseModalAdd.addEventListener('click', () => {
     ModalAdd.close();
 })
+// Llamar a la API para agregar un blog
+addBlog.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const title = document.getElementById('TitleNotes').value;
+    const content = document.getElementById('ContentNotes').value;
+    const category = document.getElementById('CategoryNotes').value;
+    const tagsValue = document.getElementById('TagsNotes').value;
+    const createdNotes = document.getElementById('CreatedNotes').value;
+    const updatedNotes = new Date().toISOString();
 
-// Evento para agregar un blog
-AddBlog.addEventListener('submit', (e) =>{
-    e.preventDefault()
-    const Title = document.getElementById('Title').value;
-    const Content = document.getElementById('Content').value;
-    const Category = document.getElementById('Category').value;
-    const Tags = document.getElementById('Tags').value;
-    const CreatedNotes = document.getElementById('CreatedNotes').value;
 
-    if(Title && Content && Category && Tags && CreatedNotes){
+    if(title && content && category && tagsValue && createdNotes){
         const dataContent = {
-            title: Title,
-            content: Content,
-            category_name: Category,
-            name_tag: Tags,
-            createdNotes: CreatedNotes
+            title: title,
+            content: content,
+            category: category,
+            tags: tagsValue.split(','),
+            createdNotes: createdNotes,
+            updatedNotes: updatedNotes
         }
-        // Fetch de crear un blog
-        const createNotes = async () => {
-            try{
-                const response = await fetch('http://localhost:3500/Notes', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(dataContent)
-                })
+        try{
+            const response = await fetch(`http://localhost:3500/Notes/Create`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(dataContent)
+            })
+            if(!response.ok){
+                throw new Error('Error en la respuesta de la API');
+            }
+            const data = await response.json();
+            alert('Blog is created successfully');
+            getMyBlogs();
+        }
+        catch(error){
+            console.error('Error al crear el blog:', error);
+        }
+        finally{
+            ModalAdd.close();
+        }
+    }
+    title.value = '';
+    content.value = '';
+    category.value = '';
+    tagsValue.value = '';
+    createdNotes.value = '';
+    
 
-                if(!response.ok){
-                    throw new Error('Error en la respuesta de la API');
-                }
-                const data = await response.json();
-                console.log('Blog creado:', data);
-                alert('Blog created successfully');
-                getMyBlogs();
-            }
-            catch(error){
-                console.error('Error al crear el blog:', error);
-            }
-            finally{
-                ModalAdd.close();
-                AddBlog.reset();
-            }
-        }
-        createNotes();
-    }
-    else if(!Title || !Content || !Category || !Tags || !CreatedNotes){
-        alert('Please fill in all fields');
-    }
-    else{
-        alert('Error creating blog');
-    }
 })
-
 getMyBlogs();

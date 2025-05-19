@@ -18,7 +18,7 @@ RouterNotes.get('/createDate/:createdNotes', controllerNotes.getCreatedNote);
 RouterNotes.get('/updateDate/:updatedNotes', controllerNotes.getUpdatedNote);
 
 // POST
-RouterNotes.post('/', controllerNotes.createNotes);
+RouterNotes.post('/Create', controllerNotes.createNotes);
 
 // PATCH
 RouterNotes.patch('/:id', controllerNotes.UpdateNotes);

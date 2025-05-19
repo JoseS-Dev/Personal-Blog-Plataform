@@ -17,16 +17,16 @@ GEt http://localhost:3500/Notes/createDate/2021-09-10
 GEt http://localhost:3500/Notes/updateDate/2021-09-05
 
 ### Crear una nota o blog
-POST http://localhost:3500/Notes
+POST http://localhost:3500/Notes/Create
 Content-Type: application/json
 
 {
-  "title": "Top 10 Travel Destinations",
-    "content": "A list of must-see travel spots around the world.",
-    "category": "Lifestyle",
-    "tags": ["Travel", "Adventure"],
-    "createdNotes": "2021-09-10",
-    "updatedNotes": "2021-09-10"
+  "title": "Mental Health Awareness",
+    "content": "Discussing mental health challenges and support.",
+    "category": "Social",
+    "tags": ["Mental Health", "Wellbeing"],
+    "createdNotes": "2021-10-15",
+    "updatedNotes": "2021-10-15"
 }
 
 ### Actualizar una nota
