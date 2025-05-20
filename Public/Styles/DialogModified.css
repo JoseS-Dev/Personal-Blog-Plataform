@@ -3,7 +3,7 @@
     left: 25%;
     top: 10%;
     width: 50%;
-    height: 80%;
+    height: 85%;
     background-color: #111;
     border-radius: 25px;
     color: var(--FontColor);
@@ -30,4 +30,135 @@
     justify-content: space-between;
     align-items: center;
     padding: 0 10px;
+}
+.JS--DialogModify .JS--ContainerModify h2 span{
+    font-size: 0.8em;
+    letter-spacing: 1px;
+    transition: .1s linear;
+}
+.JS--DialogModify .JS--ContainerModify h2 span:hover{
+    color: #ddaa55;
+    cursor: pointer;
+}
+.JS--DialogModify .JS--ContainerModify .JS--ModifiyBlog{
+    width: 100%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.JS--DialogModify .JS--ContainerModify .JS--ModifiyBlog .JS--ContainerInput{
+    width: 100%;
+    height: 25%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.JS--DialogModify .JS--ContainerModify .JS--ModifiyBlog .JS--ContainerInput .JS--ContainerModifiyTitle{
+    border-bottom: 1px solid #444;
+    width: 50%;
+    height: 100%;
+    padding: 15px 10px;
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+    align-items: center;
+}
+.JS--DialogModify .JS--ContainerModify .JS--ModifiyBlog .JS--ContainerInput .JS--ContainerModifiyTitle label{
+    font-size: 1.2em;
+    letter-spacing: 1px;
+    font-weight: 500;
+    width: 100%;
+    border-bottom: 1px solid #444;
+}
+.JS--DialogModify .JS--ContainerModify .JS--ModifiyBlog .JS--ContainerInput .JS--ContainerModifiyTitle input{
+    width: 100%;
+    height: 70%;
+    padding: 10px 8px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #333;
+    border-right: 1px solid #333;
+    border-radius: 25px;
+    font-size: 1em;
+    color: var(--FontColor);
+    transition: .1s linear;
+}
+.JS--DialogModify .JS--ContainerModify .JS--ModifiyBlog .JS--ContainerInput .JS--ContainerModifiyTitle input:hover{
+    border-bottom: 1px solid #ddaa;
+    border-right: 1px solid #ddaa;
+}
+.JS--DialogModify .JS--ContainerModify .JS--ModifiyBlog .JS--ContainerInput .JS--ContainerModifiyTitle input:focus{
+    border-bottom: 1px solid #ddaa;
+    border-right: 1px solid #ddaa;
+}
+.JS--DialogModify .JS--ContainerModify .JS--ModifiyBlog .JS--ContainerInput .JS--ContainerModifiyTextArea{
+    width: 100%;
+    height: 100%;
+    padding: 5px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.JS--DialogModify .JS--ContainerModify .JS--ModifiyBlog .JS--ContainerInput .JS--ContainerModifiyTextArea label{
+    font-size: 1.3em;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+.JS--DialogModify .JS--ContainerModify .JS--ModifiyBlog .JS--ContainerInput .JS--ContainerModifiyTextArea textarea{
+    width: 82%;
+    height: 100%;
+    font-size: 0.9em;
+    padding: 5px 10px;
+    outline: none;
+    resize: none;
+    border: none;
+    color: var(--FontColor);
+    background-color: transparent;
+    border-bottom: 1px solid #444;
+    border-right: 1px solid #444;
+    border-radius: 10px;
+    transition: .1s linear;
+}
+.JS--DialogModify .JS--ContainerModify .JS--ModifiyBlog .JS--ContainerInput .JS--ContainerModifiyTextArea textarea:hover{
+    border-bottom: 1px solid #ddaa;
+    border-right: 1px solid #ddaa;
+}
+.JS--DialogModify .JS--ContainerModify .JS--ModifiyBlog .JS--ContainerInput .JS--ContainerModifiyTextArea textarea:focus{
+    border-bottom: 1px solid #ddaa;
+    border-right: 1px solid #ddaa;
+}
+.JS--DialogModify .JS--ContainerModify .JS--ModifiyBlog .JS--Button{
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.JS--DialogModify .JS--ContainerModify .JS--ModifiyBlog .JS--Button button{
+    width: 45%;
+    height: 80%;
+    font-size: 1em;
+    border: none;
+    outline: none;
+    letter-spacing: 1px;
+    font-weight: 500;
+    border-radius: 10px;
+    background-color: #aaa;
+    cursor: pointer;
+    transition: .2s ease-in-out;
+}
+.JS--DialogModify .JS--ContainerModify .JS--ModifiyBlog .JS--Button button:hover{
+    background-color: #222;
+    color: #ddaa55;
+    transform: scale(1.03);
+}
+.JS--DialogModify .JS--ContainerModify .JS--ModifiyBlog .JS--ContainerInput .JS--ContainerModifiyTitle:last-child{
+    width: 80%;
+    height: 100%;
+    padding: 5px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }

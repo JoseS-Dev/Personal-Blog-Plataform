@@ -209,7 +209,7 @@ export class NotesModels {
     // Actualizar una nota o blog
     static async UpdateNotes({id, notes}){
         if(id && notes){
-            const { title, content, category, tags, createdNotes, updatedNotes } = notes;
+            const { title, content, category, tags, createdNotes } = notes;
 
             // Se verifica primero si la categoria existen
             const [CategoryResult] = await connectionDb.query(`SELECT * FROM names_category WHERE category_name = ?`, [category]);
@@ -244,7 +244,7 @@ export class NotesModels {
             }
 
             // Se actualiza la nota
-            const [updateNote] = await connectionDb.query(`UPDATE content_notes SET title = ?, content = ?, createdNotes = ?, updatedNotes = ? WHERE id_notes = ?`, [title, content, createdNotes, updatedNotes, id]);
+            const [updateNote] = await connectionDb.query(`UPDATE content_notes SET title = ?, content = ?, createdNotes = ? WHERE id_notes = ?`, [title, content, createdNotes, id]);
             if(updateNote.affectedRows > 0){
                 console.log("Nota o blog creado")
 
@@ -268,7 +268,6 @@ export class NotesModels {
                     category,
                     tags,
                     createdNotes,
-                    updatedNotes
                 }
             }
         }

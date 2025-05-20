@@ -1,19 +1,19 @@
 const ListCardsBlogs = document.getElementsByClassName('JS--Cards')[0];
 const ModalAdd = document.getElementById('DialogAdd');
+const ModalModified = document.getElementById('DialogModify');
 const OpenModalAdd = document.getElementById('Add--Notes');
 const CloseModalAdd = document.getElementById('CloseDialogAdd');
+const OpenModalModified = document.getElementById('Modified--Notes');
+const CloseModalModified = document.getElementById('CloseDialogModify');
 const deleteBlog = document.getElementById('Delete--Notes');
 const addBlog = document.getElementsByClassName('JS--FormCreate')[0];
-const title = document.getElementById('TitleNotes').value;
-const content = document.getElementById('ContentNotes').value;
-const category = document.getElementById('CategoryNotes').value;
-const tagsValue = document.getElementById('TagsNotes').value;
-const createdNotes = document.getElementById('CreatedNotes').value;
-const updatedNotes = new Date().toISOString();
+
 let ListBlogsContent = [];
 let selectedVisitedCard = null;
 let selectedCard = null;
 let isDeleted = false;
+let selectedCardModified = null;
+let isModified = false;
 
 // Obtener la imagen segun la categoria del blog
 function getImageCategory(blog){
@@ -85,7 +85,15 @@ async function getMyBlogs(){
         CardsList.forEach((card) => {
             card.addEventListener('click', () => {
                 selectedVisitedCard = true;
-                if(!isDeleted){
+                
+                if(isModified){
+                    selectedCardModified = card.getAttribute('id');
+                    if(selectedCardModified){
+                        card.classList.toggle('JS--Cards--IsSelected');
+                    }
+                }
+
+                if(!isDeleted && !isModified){
                     card.classList.toggle('JS--Cards--Visited');
                     if(card.classList.contains('JS--Cards--Visited')){
                         const Index = card.getAttribute('id');
@@ -94,6 +102,8 @@ async function getMyBlogs(){
                         selectedVisitedCard = false;
                     }
                 }
+               
+                
             })
         })
 
@@ -168,7 +178,12 @@ CloseModalAdd.addEventListener('click', () => {
 // Llamar a la API para agregar un blog
 addBlog.addEventListener('submit', async (event) => {
     event.preventDefault();
-    
+    const title = document.getElementById('TitleNotes').value;
+    const content = document.getElementById('ContentNotes').value;
+    const category = document.getElementById('CategoryNotes').value;
+    const tagsValue = document.getElementById('TagsNotes').value;
+    const createdNotes = document.getElementById('CreatedNotes').value;
+    const updatedNotes = new Date().toISOString();
     if(title && content && category && tagsValue && createdNotes){
         const dataContent = {
             title: title,
@@ -202,4 +217,40 @@ addBlog.addEventListener('submit', async (event) => {
         }
     }
 })
+// Evento para abrir la ventana modal de modificar un blog
+OpenModalModified.addEventListener('click', () => {
+    ModalModified.showModal();
+    const IndexBlog = ListBlogsContent.findIndex((blog) => blog.idNotes == selectedCardModified);
+    const IdNotesModified = document.getElementById('IdNotesModified');
+    const titleInputModified = document.getElementById('TitleNotesModified');
+    const contentInputModified = document.getElementById('ContentNotesModified');
+    const categoryInputModified = document.getElementById('CategoryNotesModified');
+    const tagsInputModified = document.getElementById('TagsNotesModified');
+    const createdNotesInputModified = document.getElementById('CreatedNotesModified');
+    IdNotesModified.value = ListBlogsContent[IndexBlog].idNotes;
+    titleInputModified.value = ListBlogsContent[IndexBlog].titleBlog;
+    contentInputModified.value = ListBlogsContent[IndexBlog].contentBlog;
+    categoryInputModified.value = ListBlogsContent[IndexBlog].categoryBlog;
+    tagsInputModified.value = ListBlogsContent[IndexBlog].tagsBlog;
+    createdNotesInputModified.value = ListBlogsContent[IndexBlog].createdNotes;
+})
+
+CloseModalModified.addEventListener('click', () => {
+    ModalModified.close();
+    const titleInputModified = document.getElementById('TitleNotesModified');
+    const contentInputModified = document.getElementById('ContentNotesModified');
+    const categoryInputModified = document.getElementById('CategoryNotesModified');
+    const tagsInputModified = document.getElementById('TagsNotesModified');
+    const createdNotesInputModified = document.getElementById('CreatedNotesModified');
+    // Se limpia los campos
+    titleInputModified.value = '';
+    contentInputModified.value = '';
+    categoryInputModified.value = '';
+    tagsInputModified.value = '';
+    createdNotesInputModified.value = '';
+});
+
+// Llamar a la API para modificar un blog
+
+
 getMyBlogs();
