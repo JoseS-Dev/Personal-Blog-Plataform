@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../Styles/Global.css">
     <link rel="stylesheet" href="../Styles/Header.css">
     <link rel="stylesheet" href="../Styles/DialogAdd.css">
-    <link rel="stylesheet" href="../Styles/DialogModify.css">
+    <link rel="stylesheet" href="../Styles/DialogModified.css">
     <link rel="stylesheet" href="../Styles/Pages/Blogs.css">
     <title>Personal-Blog || Blogs</title>
 </head>
@@ -40,6 +40,7 @@
         <Section class="JS--ContainerCards">
             <article class="JS--Cards"></article>
         </Section>
+        <!--Dialog Add Blog-->
         <dialog class="JS--DialogAdd" id="DialogAdd">
             <article class="JS--ContainerAdd">
                 <h2>
@@ -64,7 +65,7 @@
                         </div>
                         <div class="JS--ContainerInputTitle">
                             <label for="CreateDateNotes">Date</label>
-                            <input type="text" id="CreatedNotes" name="createdNotes" required>
+                            <input type="date" id="CreatedNotes" name="createdNotes" required>
                         </div>
                     </div>
                     <div class="JS--ContainerInput">
@@ -75,6 +76,52 @@
                     </div>
                     <div class="JS--Button">
                         <button id="CreateNotes">Create Blog</button>
+                    </div>
+                </form>
+            </article>
+        </dialog>
+        <!--Dialog Modify Blog-->
+        <dialog class="JS--DialogModify" id="DialogModify" open>
+            <article class="JS--ContainerModify">
+                <h2>
+                    Modify Blog
+                    <span id="CloseDialogModify" class="JS--CloseDialogModify">X</span>
+                </h2>
+                <form class="JS--ModifiyBlog">
+                    <div class="JS--ContainerInput">
+                        <div class="JS--ContainerModifiyTitle">
+                            <Label>Id</Label>
+                            <input type="text" id="IdNotes" name="id" placeholder="Id of the blog" required>
+                        </div>
+                        <div class="JS--ContainerModifiyTitle">
+                            <label for="TitleNotes">Title</label>
+                            <input type="text" id="TitleNotes" name="title" placeholder="Title of the blog" required>
+                        </div>
+                    </div>
+                    <div class="JS--ContainerInput">
+                        <div class="JS--ContainerModifiyTitle">
+                            <label for="CategoryNotes">Category</label>
+                            <input type="text" id="CategoryNotes" name="category_name" placeholder="Category of the blog" required>
+                        </div>
+                        <div class="JS--ContainerModifiyTitle">
+                            <label for="TagsNotes">Tags</label>
+                            <input type="text" id="TagsNotes" name="name_tag" placeholder="Tags of the blog" required>
+                        </div>
+                    </div>
+                    <div class="JS--ContainerInput">
+                        <div class="JS--ContainerModifiyTitle">
+                            <label for="CreateDateNotes">Date</label>
+                            <input type="text" id="CreatedNotes" name="createdNotes" required>
+                        </div>
+                    </div>
+                    <div class="JS--ContainerInput">
+                        <div class="JS--ContainerModifiyTextArea">
+                            <label for="ContentNotes">Content:</label>
+                            <textarea id="ContentNotes" name="content" placeholder="Content of the blog" required ></textarea>
+                        </div>
+                    </div>
+                    <div class="JS--Button">
+                        <button id="ModifyNotes">Modify Blog</button>
                     </div>
                 </form>
             </article>
