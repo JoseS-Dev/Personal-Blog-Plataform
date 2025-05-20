@@ -7,13 +7,13 @@ const OpenModalModified = document.getElementById('Modified--Notes');
 const CloseModalModified = document.getElementById('CloseDialogModify');
 const deleteBlog = document.getElementById('Delete--Notes');
 const addBlog = document.getElementsByClassName('JS--FormCreate')[0];
-
 let ListBlogsContent = [];
 let selectedVisitedCard = null;
 let selectedCard = null;
 let isDeleted = false;
 let selectedCardModified = null;
 let isModified = false;
+
 
 // Obtener la imagen segun la categoria del blog
 function getImageCategory(blog){
@@ -85,11 +85,18 @@ async function getMyBlogs(){
         CardsList.forEach((card) => {
             card.addEventListener('click', () => {
                 selectedVisitedCard = true;
+                isModified = false;
                 
-                if(isModified){
-                    selectedCardModified = card.getAttribute('id');
-                    if(selectedCardModified){
-                        card.classList.toggle('JS--Cards--IsSelected');
+                selectedCardModified = card.getAttribute('id');
+                if(selectedCardModified){
+                    card.classList.toggle('JS--Cards--IsSelected');
+                    if(card.classList.contains('JS--Cards--IsSelected')){
+                        selectedCardModified = card.getAttribute('id');
+                        isModified = true;
+                    }
+                    else{
+                        selectedCardModified = null;
+                        isModified = false;
                     }
                 }
 
@@ -121,7 +128,7 @@ deleteBlog.addEventListener('click', () =>{
             card.addEventListener('click', () => {
                 selectedCard = card.getAttribute('id');
                 if(selectedCard){
-                    card.classList.toggle('JS--Cards--IsSelected');
+                    card.classList.toggle('JS--Cards--IsDeleted');
                 }
                 
             })

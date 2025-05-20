@@ -89,6 +89,10 @@ svg:hover{
     background-color: #555;
     border: 1px solid #ddaa00;
 }
+.JS--MainPage .JS--ContainerCards .JS--Cards--IsDeleted{
+    background-color: #333; 
+    border: 1px solid #ddaa00;
+}
 .JS--MainPage .JS--ContainerCards .JS--Visited{
     background: linear-gradient(to right, #111, #000);
     border: 1px solid #ddaa00;
