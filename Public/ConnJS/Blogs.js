@@ -7,6 +7,7 @@ const OpenModalModified = document.getElementById('Modified--Notes');
 const CloseModalModified = document.getElementById('CloseDialogModify');
 const deleteBlog = document.getElementById('Delete--Notes');
 const addBlog = document.getElementsByClassName('JS--FormCreate')[0];
+const ModifiyBlog = document.getElementsByClassName('JS--DialogModify')[0];
 let ListBlogsContent = [];
 let selectedVisitedCard = null;
 let selectedCard = null;
@@ -258,6 +259,48 @@ CloseModalModified.addEventListener('click', () => {
 });
 
 // Llamar a la API para modificar un blog
+ModifiyBlog.addEventListener('submit', async(event) => {
+    event.preventDefault();
+    const titleInputModified = document.getElementById('TitleNotesModified').value;
+    const contentInputModified = document.getElementById('ContentNotesModified').value;
+    const categoryInputModified = document.getElementById('CategoryNotesModified').value;
+    const tagsInputModified = document.getElementById('TagsNotesModified').value;
+    const createdNotesInputModified = document.getElementById('CreatedNotesModified').value;
+    console.log(titleInputModified, contentInputModified, categoryInputModified, tagsInputModified, createdNotesInputModified);
 
+    if (titleInputModified && contentInputModified && categoryInputModified && tagsInputModified && createdNotesInputModified) {
+        const dataContent = {
+            title: titleInputModified,
+            content: contentInputModified,
+            category: categoryInputModified,
+            tags: tagsInputModified.split(','),
+            createdNotes: createdNotesInputModified,
+        }
+        try{
+            const response = await fetch(`http://localhost:3500/Notes/${selectedCardModified}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(dataContent)
+            })
+            if(!response.ok) throw new Error('Error en la respuesta de la API');
+            const data = await response.json();
+            alert('Blog is modified successfully');
+            console.log('Blog modificado:', data);
+            CloseModalModified.click();
+        }
+        catch(error){
+            console.error('Error al modificar el blog:', error);
+        }
+        finally{
+            ModalModified.close();
+            getMyBlogs();
+        }
+    }
+    else{
+        alert('Please fill in all fields');
+    }
+})
 
 getMyBlogs();

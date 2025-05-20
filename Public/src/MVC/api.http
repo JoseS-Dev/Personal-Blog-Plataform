@@ -21,12 +21,12 @@ POST http://localhost:3500/Notes/Create
 Content-Type: application/json
 
 {
-  "title": "Mental Health Awareness",
-    "content": "Discussing mental health challenges and support.",
-    "category": "Social",
-    "tags": ["Mental Health", "Wellbeing"],
-    "createdNotes": "2021-10-15",
-    "updatedNotes": "2021-10-15"
+  "title": "My First Blog Post",
+    "content": "This is the content of my first blog post.",
+    "category": "Technology",
+    "tags": ["Tech", "Programming"],
+    "createdNotes": "2021-09-01",
+    "updatedNotes": "2021-09-01"
 }
 
 ### Actualizar una nota
