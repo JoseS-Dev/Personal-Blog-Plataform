@@ -96,6 +96,14 @@ svg:hover{
     background-color: #333;
     transform: scale(1.01);
 }
+.JS--MainPage .JS--ContainerCards .JS--Cards--IsVisited{
+    background-color: #555;
+    border: 1px solid #ddaa00;
+}
+.JS--MainPage .JS--ContainerCards .JS--Cards--IsDeleted{
+    background-color: #333; 
+    border: 1px solid #ddaa00;
+}
 .JS--MainPage .JS--ContainerCards .JS--Cards .JS--Card:hover h3{
     color: #ddaa33;
 }
@@ -120,7 +128,7 @@ svg:hover{
     justify-content: center;
 }
 .JS--MainPage .JS--ContainerCards .JS--Cards .JS--Card .JS--ContentCardText h3{
-    font-size: 1.5em;
+    font-size: 1.1em;
     letter-spacing: 1px;
     font-weight: 500;
     max-width: 100%;
