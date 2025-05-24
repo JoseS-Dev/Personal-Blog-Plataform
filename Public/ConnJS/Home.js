@@ -44,27 +44,35 @@ async function getBlogs(){
         let ContentList = '';
         ListBlogsContent = data.map((blog) => {
             ContentList += `
-                <article class="JS--BlogCard">
+                <article class="JS--BlogCard" id=${blog.id_notes}>
                     <div class="JS--BlogCardImage">
                         <img src= ${getImageCategory(blog)} alt="${blog.createdNotes}" title="${blog.category_name}"/>
                     </div>
                     <div class="JS--BlogCardText">
                         <h4>${blog.title}</h4>
-                        <button class="JS--ButtonRead">More</button>
+                        <button class="Read--Blog">More</button>
                     </div>
                 </article>
             `
             return {
-                id: blog.id,
+                idNotes: blog.id_notes,
                 titleBlog: blog.title,
                 contentBlog: blog.content,
                 createdAt: blog.createdNotes,
-                CategoryBlog: blog.category_name,
-                tagsBlog: blog.tags,
+                categoryBlog: blog.category_name,
+                tagsBlog: blog.name_tag,
                 ImageCategory: getImageCategory(blog),
             }
         })
         ListBlogs.innerHTML = ContentList;
+        document.querySelectorAll('.Read--Blog').forEach((button) =>{
+            button.addEventListener('click', () => {
+                const IndexElement = button.parentElement.parentElement.id;
+                localStorage.setItem('BlogDetails', JSON.stringify(ListBlogsContent[ListBlogsContent.findIndex((blog) => blog.idNotes == IndexElement)]));
+                window.location.href = `BlogDetails.html?id=${IndexElement}`;
+            })
+        })
+
     }
     catch (error){
         console.error('Error al obtener los blogs:', error);

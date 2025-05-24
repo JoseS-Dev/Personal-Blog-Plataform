@@ -44,28 +44,28 @@ function getImageCategory(blog){
     let imageCategory = '';
     switch(blog.category_name){
         case 'Technology':
-            imageCategory = '../asserts/Svg/Technology.svg';
+            imageCategory = 'asserts/Svg/Technology.svg';
             break;
         case 'Social':
-            imageCategory = '../asserts/Svg/Social.svg';
+            imageCategory = 'asserts/Svg/Social.svg';
             break;
         case 'Lifestyle':
-            imageCategory = '../asserts/Svg/Lifestyle.svg';
+            imageCategory = 'asserts/Svg/Lifestyle.svg';
             break;
         case 'Business and Finance':
-            imageCategory = '../asserts/Svg/Business.svg';
+            imageCategory = 'asserts/Svg/Business.svg';
             break;
         case 'Entertainment':
-            imageCategory = '../asserts/Svg/Entertainment.svg';
+            imageCategory = 'asserts/Svg/Entertainment.svg';
             break;
         case 'Science':
-            imageCategory = '../asserts/Svg/Science.svg';
+            imageCategory = 'asserts/Svg/Science.svg';
             break;
         case 'Opinion':
-            imageCategory = '../asserts/Svg/Opinion.svg';
+            imageCategory = 'asserts/Svg/Opinion.svg';
             break;
         case 'Education':
-            imageCategory = '../asserts/Svg/Education.svg';
+            imageCategory = 'asserts/Svg/Education.svg';
             break;
     }
     return imageCategory;
@@ -94,7 +94,7 @@ function setFavoritesBlog(){
             FavoritesBlog.classList.add('Favorites--Blog--IsSelected');
             FavoritesBlog.classList.remove('Favorites--Blog');
         
-            
+
         }else{
             FavoritesBlog.classList.remove('Favorites--Blog--IsSelected');
             FavoritesBlog.classList.add('Favorites--Blog');
@@ -170,9 +170,8 @@ async function getMyBlogs(){
         document.querySelectorAll('.Read--Blog').forEach((button) =>{
             button.addEventListener('click', () => {
                 const IndexElement = button.parentElement.parentElement.id;
-                console.log(IndexElement);
                 localStorage.setItem('BlogDetails', JSON.stringify(ListBlogContent[ListBlogContent.findIndex((blog) => blog.idNotes == IndexElement)]));
-                window.location.href = `../Pages/BlogDetails.html?id=${IndexElement}`;
+                window.location.href = `BlogDetails.html?id=${IndexElement}`;
             })
         })
     }

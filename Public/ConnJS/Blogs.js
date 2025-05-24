@@ -21,28 +21,28 @@ function getImageCategory(blog){
     let imageCategory = '';
     switch(blog.category_name){
         case 'Technology':
-            imageCategory = '../asserts/Svg/Technology.svg';
+            imageCategory = 'asserts/Svg/Technology.svg';
             break;
         case 'Social':
-            imageCategory = '../asserts/Svg/Social.svg';
+            imageCategory = 'asserts/Svg/Social.svg';
             break;
         case 'Lifestyle':
-            imageCategory = '../asserts/Svg/Lifestyle.svg';
+            imageCategory = 'asserts/Svg/Lifestyle.svg';
             break;
         case 'Business and Finance':
-            imageCategory = '../asserts/Svg/Business.svg';
+            imageCategory = 'asserts/Svg/Business.svg';
             break;
         case 'Entertainment':
-            imageCategory = '../asserts/Svg/Entertainment.svg';
+            imageCategory = 'asserts/Svg/Entertainment.svg';
             break;
         case 'Science':
-            imageCategory = '../asserts/Svg/Science.svg';
+            imageCategory = 'asserts/Svg/Science.svg';
             break;
         case 'Opinion':
-            imageCategory = '../asserts/Svg/Opinion.svg';
+            imageCategory = 'asserts/Svg/Opinion.svg';
             break;
         case 'Education':
-            imageCategory = '../asserts/Svg/Education.svg';
+            imageCategory = 'asserts/Svg/Education.svg';
             break;
     }
     return imageCategory;
@@ -105,7 +105,7 @@ async function getMyBlogs(){
                     card.classList.toggle('JS--Cards--Visited');
                     if(card.classList.contains('JS--Cards--Visited')){
                         const Index = card.getAttribute('id');
-                        window.location.href = `../Pages/BlogDetails.html?id=${Index}`;
+                        window.location.href = `BlogDetails.html?id=${Index}`;
                         localStorage.setItem('BlogDetails', JSON.stringify(ListBlogsContent[ListBlogsContent.findIndex((blog) => blog.idNotes == Index)]));
                         selectedVisitedCard = false;
                     }
